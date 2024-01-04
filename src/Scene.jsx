@@ -2,6 +2,7 @@ import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  Loader,
 } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { InstantTracker, ZapparCamera } from "@zappar/zappar-react-three-fiber";
@@ -12,7 +13,7 @@ import { Track } from "./Track";
 
 export function Scene() {
   const [thirdPerson, setThirdPerson] = useState(false);
-  const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
+  const [cameraPosition, setCameraPosition] = useState([0, 2, -5]);
 
   const set = useThree((state) => state.set);
   const cameraRef = useRef();
@@ -35,25 +36,23 @@ export function Scene() {
   }, [thirdPerson]);
 
   return (
-    <Suspense fallback={null}>
+    <>
       <ZapparCamera makeDefault={false} ref={cameraRef} />
-      <InstantTracker
-        placementUI="placement-only"
-        placementCameraOffset={[0, 0, -10]}
-      >
+      <InstantTracker placementCameraOffset={[0, 0, -10]}>
         {/* <Environment
           files={process.env.PUBLIC_URL + "/textures/envmap.hdr"}
           background={"both"}
         /> */}
+        <Suspense fallback={null}>
+          <PerspectiveCamera makeDefault position={cameraPosition} fov={40} />
+          {!thirdPerson && <OrbitControls target={[-2.64, -0.71, 0.03]} />}
 
-        <PerspectiveCamera makeDefault position={cameraPosition} fov={40} />
-        {!thirdPerson && <OrbitControls target={[-2.64, -0.71, 0.03]} />}
-
-        <Ground />
-        <Track />
-        <Car thirdPerson={thirdPerson} />
+          <Ground />
+          <Track />
+          <Car thirdPerson={thirdPerson} />
+        </Suspense>
       </InstantTracker>
-      <directionalLight position={[2.5, 8, 5]} intensity={0.5} />
-    </Suspense>
+      <ambientLight position={[2.5, 8, 5]} intensity={0.2} />
+    </>
   );
 }
