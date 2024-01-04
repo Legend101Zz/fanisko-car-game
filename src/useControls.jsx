@@ -87,8 +87,9 @@ export const CarControls = ({ vehicleApi, chassisApi }) => {
       zIndexRange={[100, 0]}
       style={{
         position: "absolute",
-        bottom: "10px",
-        left: "50%",
+        top: "auto", // Set top to auto
+        bottom: "0px", // Align to the bottom
+        left: "1000%",
         transform: "translateX(-50%)",
         display: "flex",
         flexDirection: "column",
