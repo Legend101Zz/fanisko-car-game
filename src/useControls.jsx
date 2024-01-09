@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useBox } from "@react-three/cannon";
+import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 // import { Button } from "./Button"; // Create a Button component with your desired styling
 
@@ -79,18 +80,28 @@ export const CarControls = ({ vehicleApi, chassisApi }) => {
     }
   }, [controls, vehicleApi, chassisApi]);
 
+  useFrame((state) => {
+    if (state.camera && state.camera.position) {
+      const { x, y, z } = state.camera.position;
+      // Set the position of HTML elements relative to the camera
+      const htmlElement = document.getElementById("controls");
+      if (htmlElement) {
+        htmlElement.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+      }
+    }
+  });
+
   return (
     <Html
       as="div"
       center
-      distanceFactor={10}
       zIndexRange={[100, 0]}
       style={{
-        position: "absolute",
-        top: "auto", // Set top to auto
-        bottom: "0px", // Align to the bottom
-        left: "1000%",
-        transform: "translateX(-50%)",
+        zIndex: "999",
+        position: "fixed",
+        bottom: "50%", // Adjust as needed
+        left: "50%", // Adjust as needed
+        transform: "translate(-50%, -50%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

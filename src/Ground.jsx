@@ -7,10 +7,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 export function Ground() {
   const [ref] = usePlane(
-    () => ({ 
-      type: 'Static', 
-      rotation: [-Math.PI / 2, 0, 0] }
-    ), 
+    () => ({
+      type: "Static",
+      rotation: [-Math.PI / 2, 0, 0],
+    }),
     useRef(null)
   );
 
@@ -75,11 +75,10 @@ export function Ground() {
           aoMap={aoMap}
           alphaMap={alphaMap}
           transparent={true}
-          color={[0.5, 0.5, 0.5]}
+          color={[0, 0, 0]}
           envMapIntensity={0.35}
           metalness={0.05}
           roughness={0.4}
-
           dithering={true}
           blur={[1024, 512]} // Blur ground reflections (width, heigt), 0 skips blur
           mixBlur={3} // How much blur mixes with surface roughness (default = 1)
