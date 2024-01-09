@@ -19,7 +19,7 @@ html,
 
 #zappar-placement-ui {
   position: absolute;
-  bottom: 30px;
+  bottom: 200px;
   width: 200px;
   left: calc(50% - 100px);
   z-index: 1000;
