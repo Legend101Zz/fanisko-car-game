@@ -11,9 +11,9 @@ import { Car } from "./Car";
 import { Ground } from "./Ground";
 import { Track } from "./Track";
 
-export function Scene() {
-  const [thirdPerson, setThirdPerson] = useState(false);
-  const [cameraPosition, setCameraPosition] = useState([0, 2, -5]);
+export function Scene({ placementMode }) {
+  const [thirdPerson, setThirdPerson] = useState(true);
+  const [cameraPosition, setCameraPosition] = useState([-2, 2, -5]);
 
   const set = useThree((state) => state.set);
   const cameraRef = useRef();
@@ -38,7 +38,10 @@ export function Scene() {
   return (
     <>
       <ZapparCamera makeDefault={false} ref={cameraRef} />
-      <InstantTracker placementCameraOffset={[0, 0, -10]}>
+      <InstantTracker
+        placementMode={placementMode}
+        placementCameraOffset={[0, 0, -10]}
+      >
         {/* <Environment
           files={process.env.PUBLIC_URL + "/textures/envmap.hdr"}
           background={"both"}

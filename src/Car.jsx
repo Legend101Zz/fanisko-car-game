@@ -47,6 +47,7 @@ export function Car({ thirdPerson }) {
     if (!thirdPerson) return;
 
     let position = new Vector3(0, 0, 0);
+
     position.setFromMatrixPosition(chassisBody.current.matrixWorld);
 
     let quaternion = new Quaternion(0, 0, 0, 0);
@@ -58,10 +59,11 @@ export function Car({ thirdPerson }) {
 
     let cameraPosition = position
       .clone()
-      .add(wDir.clone().multiplyScalar(1).add(new Vector3(0, 0.3, 0)));
+      .add(wDir.clone().multiplyScalar(1).add(new Vector3(0, 0.3, 10)));
 
     wDir.add(new Vector3(0, 0.2, 0));
     state.camera.position.copy(cameraPosition);
+    console.log("scene state ", position, state);
     state.camera.lookAt(position);
   });
 
