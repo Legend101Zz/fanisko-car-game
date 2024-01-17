@@ -11,7 +11,7 @@ import { Car } from "./Car";
 import { Ground } from "./Ground";
 import { Track } from "./Track";
 
-export function Scene({ placementMode }) {
+export function Scene({ placementMode , controls}) {
   const [thirdPerson, setThirdPerson] = useState(true);
   const [cameraPosition, setCameraPosition] = useState([-2, 2, -5]);
 
@@ -52,7 +52,7 @@ export function Scene({ placementMode }) {
 
           <Ground />
           <Track />
-          <Car thirdPerson={thirdPerson} />
+          <Car thirdPerson={thirdPerson} controls={controls} />
         </Suspense>
       </InstantTracker>
       <ambientLight position={[2.5, 8, 5]} intensity={0.2} />

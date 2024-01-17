@@ -7,7 +7,7 @@ import { CarControls } from "./useControls";
 import { useWheels } from "./useWheels";
 import { WheelDebug } from "./WheelDebug";
 
-export function Car({ thirdPerson }) {
+export function Car({ thirdPerson, controls }) {
   // thanks to the_86_guy!
   // https://sketchfab.com/3d-models/low-poly-car-muscle-car-2-ac23acdb0bd54ab38ea72008f3312861
   let result = useLoader(
@@ -45,6 +45,33 @@ export function Car({ thirdPerson }) {
 
   useFrame((state) => {
     if (!thirdPerson) return;
+    // Use the controls prop to handle car movements
+    if (controls.w) {
+      vehicleApi.applyEngineForce(150, 2);
+      vehicleApi.applyEngineForce(150, 3);
+    } else if (controls.s) {
+      vehicleApi.applyEngineForce(-150, 2);
+      vehicleApi.applyEngineForce(-150, 3);
+    } else {
+      vehicleApi.applyEngineForce(0, 2);
+      vehicleApi.applyEngineForce(0, 3);
+    }
+
+    if (controls.a) {
+      vehicleApi.setSteeringValue(0.35, 2);
+      vehicleApi.setSteeringValue(0.35, 3);
+      vehicleApi.setSteeringValue(-0.1, 0);
+      vehicleApi.setSteeringValue(-0.1, 1);
+    } else if (controls.d) {
+      vehicleApi.setSteeringValue(-0.35, 2);
+      vehicleApi.setSteeringValue(-0.35, 3);
+      vehicleApi.setSteeringValue(0.1, 0);
+      vehicleApi.setSteeringValue(0.1, 1);
+    } else {
+      for (let i = 0; i < 4; i++) {
+        vehicleApi.setSteeringValue(0, i);
+      }
+    }
 
     let position = new Vector3(0, 0, 0);
 
