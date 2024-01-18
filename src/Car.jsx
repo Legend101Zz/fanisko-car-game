@@ -47,11 +47,11 @@ export function Car({ thirdPerson, controls }) {
     if (!thirdPerson) return;
     // Use the controls prop to handle car movements
     if (controls.w) {
-      vehicleApi.applyEngineForce(150, 2);
-      vehicleApi.applyEngineForce(150, 3);
+      vehicleApi.applyEngineForce(70, 2);
+      vehicleApi.applyEngineForce(70, 3);
     } else if (controls.s) {
-      vehicleApi.applyEngineForce(-150, 2);
-      vehicleApi.applyEngineForce(-150, 3);
+      vehicleApi.applyEngineForce(-70, 2);
+      vehicleApi.applyEngineForce(-70, 3);
     } else {
       vehicleApi.applyEngineForce(0, 2);
       vehicleApi.applyEngineForce(0, 3);

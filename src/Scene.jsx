@@ -11,7 +11,7 @@ import { Car } from "./Car";
 import { Ground } from "./Ground";
 import { Track } from "./Track";
 
-export function Scene({ placementMode , controls}) {
+export function Scene({ placementMode, controls }) {
   const [thirdPerson, setThirdPerson] = useState(true);
   const [cameraPosition, setCameraPosition] = useState([-2, 2, -5]);
 
@@ -48,7 +48,6 @@ export function Scene({ placementMode , controls}) {
         /> */}
         <Suspense fallback={null}>
           <PerspectiveCamera makeDefault position={cameraPosition} fov={40} />
-          {!thirdPerson && <OrbitControls target={[-2.64, -0.71, 0.03]} />}
 
           <Ground />
           <Track />

@@ -1,11 +1,14 @@
 import { useLoader } from "@react-three/fiber";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { ColliderBox } from "./ColliderBox";
 import { Ramp } from "./Ramp";
+import { Coin } from "./Coin";
 
 export function Track() {
+  const [collectedCoins, setCollectedCoins] = useState(0);
+
   const result = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL + "/models/track.glb"
@@ -15,6 +18,10 @@ export function Track() {
     TextureLoader,
     process.env.PUBLIC_URL + "/textures/track.png"
   );
+
+  const handleCollect = () => {
+    setCollectedCoins((prevCoins) => prevCoins + 1);
+  };
 
   useEffect(() => {
     colorMap.anisotropy = 16;
@@ -29,10 +36,17 @@ export function Track() {
       </mesh>
 
       <Ramp />
-
-      <ColliderBox position={[1.75, 0, 0.5]} scale={[0.3, 1, 0.3]} />
-      <ColliderBox position={[2.5, 0, -1.4]} scale={[0.3, 1, 0.3]} />
-      <ColliderBox position={[0.6, 0, -3.8]} scale={[0.3, 1, 0.3]} />
+      <Coin position={[-2.5, 0.1, 3]} onCollect={handleCollect} />
+      <Coin position={[-2.5, 0.1, 3]} onCollect={handleCollect} />
+      <Coin position={[-5.5, 0.1, 4]} onCollect={handleCollect} />
+      <Coin position={[-5.5, 0.1, 2.5]} onCollect={handleCollect} />
+      <Coin position={[-3.5, 0.1, 3]} onCollect={handleCollect} />
+      <Coin position={[-3.5, 0.1, 1.4]} onCollect={handleCollect} />
+      <Coin position={[-5.5, 0.1, -1.77]} onCollect={handleCollect} />
+      <Coin position={[-5.5, 0.1, -2]} onCollect={handleCollect} />
+      <ColliderBox position={[1.75, 0, 1]} scale={[0.3, 1, 0.3]} />
+      <ColliderBox position={[2.5, 0, 1.4]} scale={[0.3, 1, 0.3]} />
+      <ColliderBox position={[0.6, 0, 3.8]} scale={[0.3, 1, 0.3]} />
       <ColliderBox position={[-1.95, 0, -5.18]} scale={[0.3, 1, 0.3]} />
       <ColliderBox position={[-5.55, 0, -3.05]} scale={[0.3, 1, 0.3]} />
       <ColliderBox position={[-4.4, 0, -1.77]} scale={[0.3, 1, 0.3]} />
