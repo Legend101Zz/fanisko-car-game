@@ -5,7 +5,12 @@ import { useFrame } from "@react-three/fiber";
 import { useCollision } from "@react-three/cannon";
 
 export function Coin({ position, onCollect }) {
-  const [ref] = useBox(() => ({
+  const [ref] = useBox((state) => ({
+    onCollide: () => {
+      ref.current.remove();
+
+      onCollect();
+    },
     type: "Kinematic",
     args: [0.1, 0.1, 0.1],
     position,

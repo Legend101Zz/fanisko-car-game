@@ -19,6 +19,10 @@ const App = () => {
     return () => clearInterval(timerInterval);
   }, []);
 
+  const collectCoins = () => {
+    setCollectedCoins((prevTimer) => prevTimer + 1);
+  };
+
   const handleControlDown = (control) => {
     setControls((prev) => ({ ...prev, [control]: true }));
   };
@@ -104,7 +108,11 @@ const App = () => {
 
       <Canvas colorManagement={false}>
         <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
-          <Scene placementMode={placementMode} controls={controls} />
+          <Scene
+            placementMode={placementMode}
+            controls={controls}
+            coins={collectCoins}
+          />
         </Physics>
       </Canvas>
     </>

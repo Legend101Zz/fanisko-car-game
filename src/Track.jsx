@@ -6,7 +6,7 @@ import { ColliderBox } from "./ColliderBox";
 import { Ramp } from "./Ramp";
 import { Coin } from "./Coin";
 
-export function Track() {
+export function Track({ coins }) {
   const [collectedCoins, setCollectedCoins] = useState(0);
 
   const result = useLoader(
@@ -19,9 +19,7 @@ export function Track() {
     process.env.PUBLIC_URL + "/textures/track.png"
   );
 
-  const handleCollect = () => {
-    setCollectedCoins((prevCoins) => prevCoins + 1);
-  };
+  const handleCollect = coins;
 
   useEffect(() => {
     colorMap.anisotropy = 16;
@@ -36,14 +34,14 @@ export function Track() {
       </mesh>
 
       <Ramp />
-      <Coin position={[-2.5, 0.1, 3]} onCollect={handleCollect} />
-      <Coin position={[-2.5, 0.1, 3]} onCollect={handleCollect} />
-      <Coin position={[-5.5, 0.1, 4]} onCollect={handleCollect} />
-      <Coin position={[-5.5, 0.1, 2.5]} onCollect={handleCollect} />
-      <Coin position={[-3.5, 0.1, 3]} onCollect={handleCollect} />
-      <Coin position={[-3.5, 0.1, 1.4]} onCollect={handleCollect} />
-      <Coin position={[-5.5, 0.1, -1.77]} onCollect={handleCollect} />
-      <Coin position={[-5.5, 0.1, -2]} onCollect={handleCollect} />
+      <Coin position={[-2.5, 0.1, 3]} onCollect={coins} />
+      <Coin position={[-2.5, 0.1, 3]} onCollect={coins} />
+      <Coin position={[-5.5, 0.1, 4]} onCollect={coins} />
+      <Coin position={[-5.5, 0.1, 2.5]} onCollect={coins} />
+      <Coin position={[-3.5, 0.1, 3]} onCollect={coins} />
+      <Coin position={[-3.5, 0.1, 1.4]} onCollect={coins} />
+      <Coin position={[-5.5, 0.1, -1.77]} onCollect={coins} />
+      <Coin position={[-5.5, 0.1, -2]} onCollect={coins} />
       <ColliderBox position={[1.75, 0, 1]} scale={[0.3, 1, 0.3]} />
       <ColliderBox position={[2.5, 0, 1.4]} scale={[0.3, 1, 0.3]} />
       <ColliderBox position={[0.6, 0, 3.8]} scale={[0.3, 1, 0.3]} />
