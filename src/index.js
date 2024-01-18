@@ -34,26 +34,43 @@ const App = () => {
       </div>
 
       {/* Render buttons outside the canvas */}
-      <div>
+      <div style={{
+        position: 'fixed',
+        bottom: '10px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'grid',
+        gridTemplateAreas: `
+          ' . up . '
+          'left . right'
+          ' . down . '
+        `,
+        gap: '10px',
+        zIndex: 1000
+      }}>
         <button
+          style={{gridArea: 'up'}}
           onMouseDown={() => handleControlDown("w")}
           onMouseUp={() => handleControlUp("w")}
         >
           Up
         </button>
         <button
+          style={{gridArea: 'left'}}
           onMouseDown={() => handleControlDown("a")}
           onMouseUp={() => handleControlUp("a")}
         >
           Left
         </button>
         <button
+          style={{gridArea: 'right'}}
           onMouseDown={() => handleControlDown("d")}
           onMouseUp={() => handleControlUp("d")}
         >
           Right
         </button>
         <button
+          style={{gridArea: 'down'}}
           onMouseDown={() => handleControlDown("s")}
           onMouseUp={() => handleControlUp("s")}
         >
